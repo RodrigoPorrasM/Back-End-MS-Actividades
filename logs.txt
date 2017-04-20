@@ -1,0 +1,3 @@
+2017-03-28 22:29:09 FATAL ProductRestController:41 - fatal
+2017-03-28 22:29:09 WARN  ProductRestController:42 - warn
+2017-03-28 22:29:09 ERROR ProductRestController:44 - error
