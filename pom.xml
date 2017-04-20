@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.udea</groupId>
-  <artifactId>nombre_entidad</artifactId>
+  <artifactId>registro_actividades</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>nombre_entidad</name>
+  <name>registro_actividades</name>
   <url>http://maven.apache.org</url>
 
   <properties>

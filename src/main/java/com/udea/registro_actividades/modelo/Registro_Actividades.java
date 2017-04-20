@@ -27,6 +27,7 @@ public class Registro_Actividades {
 	@Column(name="id")
 	private long id;
 	
+	@Column(name="Code")
 	@NotNull
 	private String code;
 	
