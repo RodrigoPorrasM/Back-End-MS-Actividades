@@ -13,3 +13,12 @@ public class Application {
 		SpringApplication.run(Application.class, args); 
 	}
 }
+
+
+// Save Actividades
+// FindId Actividades
+// Update Actividades
+// Delete Actividad 
+// FindDate Rango de fechas de Actividades
+// Find Asignacion (Semestre, grupo, usuario)
+// Find AsignacionDate (Rango de fechas)
