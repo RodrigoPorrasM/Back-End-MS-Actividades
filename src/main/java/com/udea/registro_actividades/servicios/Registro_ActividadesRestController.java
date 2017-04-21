@@ -1,3 +1,8 @@
+/**
+ * Esta clase define Los servicios REST para el objeto Registro de actividades
+ * @author: Gonzalo Garcia gonchalo620@gmail.com
+ * @version: 21/04/2017/
+ */
 package com.udea.registro_actividades.servicios;
 
 import java.sql.Date;
@@ -39,6 +44,11 @@ public class Registro_ActividadesRestController {
 	 * }
 	 */
 
+	
+	/**
+	 * @author: Gonzalo Garcia gonchalo620@gmail.com
+ 	* @version: 21/04/2017/
+ 	*/
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public List<Registro_Actividades> getAllRegistroActividades() {
