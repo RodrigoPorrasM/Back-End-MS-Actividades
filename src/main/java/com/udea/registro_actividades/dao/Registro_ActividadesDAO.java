@@ -18,6 +18,10 @@ public interface Registro_ActividadesDAO extends CrudRepository<Registro_Activid
 	
 	
 	//public Registro_Actividades findByPk_reg_id(Integer pk_reg_id);
-
+	
+	public Registro_Actividades findById(Integer PK_reg_id);
+	
+	public void update (Registro_Actividades entity);
+	
 }
 
