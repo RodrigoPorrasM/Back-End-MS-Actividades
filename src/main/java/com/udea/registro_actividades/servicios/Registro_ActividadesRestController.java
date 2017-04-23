@@ -7,7 +7,6 @@ package com.udea.registro_actividades.servicios;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -75,7 +74,6 @@ public class Registro_ActividadesRestController {
 				registroActividadesDAO.save(entityReg);
 				return "!Done";
 			} else {
-				System.out.println("Ya existe un registro con ese id");
 				return "Ya existe un registro con ese id";
 			}
 
@@ -99,12 +97,7 @@ public class Registro_ActividadesRestController {
 
 	/**
 	 * @author sigialzate
-	 * @param PK_reg_id
-	 * @param reg_fecha
-	 * @param reg_descripcion
-	 * @param reg_horasUtilizadas
-	 * @param fk_asig_id
-	 * @param actividades
+	 * @param entityReg
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
