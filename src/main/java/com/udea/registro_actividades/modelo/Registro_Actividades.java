@@ -5,18 +5,17 @@
  */
 package com.udea.registro_actividades.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
@@ -26,9 +25,9 @@ public class Registro_Actividades {
 	
 	@Id
 	@SequenceGenerator( name = "registroActividadesSeq", sequenceName = "tbl_registro_actividades_seq", allocationSize = 1, initialValue = 1 )
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "registroActividadesSeq" )
+//    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "registroActividadesSeq" )
 	@Column(name="PK_reg_id")
-	private Integer pk_reg_id;
+	private Integer id;
 	
 	@Column(name="reg_fecha")
 	@NotNull
@@ -43,19 +42,18 @@ public class Registro_Actividades {
 	private Integer reg_horasUtilizadas;
 	
 	//Aun no se las foranea como se colocan	
-	/*
 	@Column(name="FK_act_id")
 	@NotNull
 	private Integer fk_act_id;
-	*/
+	
 	@Column(name="FK_asig_id")
 	@NotNull
 	private Integer fk_asig_id;
 	
 	//el optional = false es porque este valor no puede ser null, es decir, siempre ha de existir. 
-	@ManyToOne(optional=false)
-    @JoinColumn(name="FK_act_id")
-    private Actividades actividades;
+//	@ManyToOne(optional=false)
+//    @JoinColumn(name="FK_act_id")
+//    private Actividades actividades;
 	
 	//CONSTRUCTOR 
 	public Registro_Actividades(){
@@ -63,22 +61,23 @@ public class Registro_Actividades {
 	}
 
 	public Registro_Actividades(Integer pk_reg_id, Date reg_fecha, String reg_descripcion, Integer reg_horasUtilizadas,
-			Integer fk_asig_id, Actividades actividades) {
+			Integer fk_asig_id, Integer fk_act_id) {
 		super();
-		this.pk_reg_id = pk_reg_id;
+		this.id = pk_reg_id;
 		this.reg_fecha = reg_fecha;
 		this.reg_descripcion = reg_descripcion;
 		this.reg_horasUtilizadas = reg_horasUtilizadas;
 		this.fk_asig_id = fk_asig_id;
-		this.actividades = actividades;
+		this.fk_act_id = fk_act_id;
+//		this.actividades = actividades;
 	}
 
 	public Integer getPk_reg_id() {
-		return pk_reg_id;
+		return id;
 	}
 
 	public void setPk_reg_id(Integer pk_reg_id) {
-		this.pk_reg_id = pk_reg_id;
+		this.id = pk_reg_id;
 	}
 
 	public Date getReg_fecha() {
@@ -112,14 +111,22 @@ public class Registro_Actividades {
 	public void setFk_asig_id(Integer fk_asig_id) {
 		this.fk_asig_id = fk_asig_id;
 	}
-
-	public Actividades getActividades() {
-		return actividades;
+	
+	public Integer getFk_act_id(){
+		return fk_act_id;
+	}
+	
+	public void setFk_act_id(Integer fk_act_id){
+		this.fk_act_id = fk_act_id;
 	}
 
-	public void setActividades(Actividades actividades) {
-		this.actividades = actividades;
-	}
+//	public Actividades getActividades() {
+//		return actividades;
+//	}
+//
+//	public void setActividades(Actividades actividades) {
+//		this.actividades = actividades;
+//	}
 
 	//CONSTRUCTOR CON PARÁMETROS
 	

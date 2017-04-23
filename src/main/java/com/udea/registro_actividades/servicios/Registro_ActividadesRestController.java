@@ -5,8 +5,9 @@
  */
 package com.udea.registro_actividades.servicios;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.udea.registro_actividades.dao.Registro_ActividadesDAO;
-import com.udea.registro_actividades.modelo.Actividades;
 import com.udea.registro_actividades.modelo.Registro_Actividades;
 
 @Controller
@@ -30,6 +30,8 @@ public class Registro_ActividadesRestController {
 
 	@Autowired
 	Registro_ActividadesDAO registroActividadesDAO;
+
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	/*
 	 * @RequestMapping("/find")
@@ -44,11 +46,10 @@ public class Registro_ActividadesRestController {
 	 * }
 	 */
 
-	
 	/**
 	 * @author: Gonzalo Garcia gonchalo620@gmail.com
- 	* @version: 21/04/2017/
- 	*/
+	 * @version: 21/04/2017/
+	 */
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public List<Registro_Actividades> getAllRegistroActividades() {
@@ -61,57 +62,41 @@ public class Registro_ActividadesRestController {
 
 	/**
 	 * @author sigialzate
-	 * @param reg_fecha
-	 * @param reg_descripcion
-	 * @param reg_horasUtilizadas
-	 * @param fk_asig_id
-	 * @param actividades
-	 * @return 
+	 * @param entityReg
+	 * @return
 	 */
-	@RequestMapping (method = RequestMethod.POST, value ="/save")
+	@RequestMapping(method = RequestMethod.POST, value = "/save")
 	@ResponseBody
-	public String saveRegistroActividades(@RequestBody Date reg_fecha, String reg_descripcion,
-			Integer reg_horasUtilizadas, Integer fk_asig_id, Actividades actividades) {
-		
-		Registro_Actividades entityRegAct = new Registro_Actividades();
-		
+	public String setRegistroActividades(@RequestBody Registro_Actividades entityReg) {
+
 		try {
-			if (reg_horasUtilizadas != null) {
-				entityRegAct.setReg_horasUtilizadas(reg_horasUtilizadas);
+			Registro_Actividades regEntity = getRegistro(entityReg.getPk_reg_id());
+			if (regEntity == null) {
+				registroActividadesDAO.save(entityReg);
+				return "!Done";
 			} else {
-				entityRegAct.setReg_horasUtilizadas(0);
+				System.out.println("Ya existe un registro con ese id");
+				return "Ya existe un registro con ese id";
 			}
-			if (reg_descripcion != null) {
-				entityRegAct.setReg_descripcion(reg_descripcion);
-			} else {
-				entityRegAct.setReg_descripcion("El docente esta " + actividades.
-						getAct_descripcion());
-			}
-			entityRegAct.setFk_asig_id(fk_asig_id);
-			entityRegAct.setActividades(actividades);
-			entityRegAct.setReg_fecha(reg_fecha);
-			
-			registroActividadesDAO.save(entityRegAct);
-			return "Done!";
 
 		} catch (Exception ex) {
-			ex.getMessage();
+			System.out.println(ex.getMessage());
 			return null;
 		}
 	}
-	
+
 	/**
 	 * @author sigialzate
-	 * @param PK_reg_id
+	 * @param id
 	 * @return
 	 */
 	@RequestMapping("/findBy")
 	@ResponseBody
-	public Registro_Actividades getRegistro(Integer PK_reg_id){
-		Registro_Actividades registroActividades = registroActividadesDAO.findById(PK_reg_id);
-		return registroActividades;		
+	public Registro_Actividades getRegistro(Integer id) {
+		Registro_Actividades registroActividades = registroActividadesDAO.findById(id);
+		return registroActividades;
 	}
-	
+
 	/**
 	 * @author sigialzate
 	 * @param PK_reg_id
@@ -122,48 +107,70 @@ public class Registro_ActividadesRestController {
 	 * @param actividades
 	 * @return
 	 */
-	@RequestMapping (method = RequestMethod.POST, value ="/update")
+	@RequestMapping(method = RequestMethod.POST, value = "/update")
 	@ResponseBody
-	public String update (@RequestBody Integer PK_reg_id, Date reg_fecha, String reg_descripcion,
-			Integer reg_horasUtilizadas, Integer fk_asig_id, Actividades actividades){
+	public String update(@RequestBody Registro_Actividades entityReg) {
 		try {
-			Registro_Actividades registroActividades = registroActividadesDAO.findById(PK_reg_id);
-			if (reg_horasUtilizadas != null) {
-				registroActividades.setReg_horasUtilizadas(reg_horasUtilizadas);
+			Registro_Actividades registroActividades = registroActividadesDAO.findById(entityReg.getPk_reg_id());
+			if (registroActividades == null) {
+				return ("No existe el registro de la actividad");
 			} else {
-				registroActividades.setReg_horasUtilizadas(registroActividades.getReg_horasUtilizadas());
+				if (entityReg.getReg_horasUtilizadas() != null) {
+					registroActividades.setReg_horasUtilizadas(entityReg.getReg_horasUtilizadas());
+				} else {
+					System.out.println("No esta registrando horas al momento de actualizar");
+				}
+				if (entityReg.getReg_descripcion() != null) {
+					registroActividades.setReg_descripcion(entityReg.getReg_descripcion());
+				} else {
+					System.out.println("No esta registrando descripcion al momento de actualizar");
+				}
+				if (entityReg.getFk_asig_id() != null) {
+					registroActividades.setFk_asig_id(entityReg.getFk_asig_id());
+				} else {
+					System.out.println("No esta registrando asignación al momento de actualizar");
+				}
+				if (entityReg.getFk_act_id() != null) {
+					registroActividades.setFk_act_id(entityReg.getFk_act_id());
+				} else {
+					System.out.println("No esta registrando actividad al momento de actualizar");
+				}
+				if (entityReg.getReg_fecha() != null) {
+					registroActividades.setReg_fecha(entityReg.getReg_fecha());
+				} else {
+					System.out.println("No esta registrando fecha al momento de actualizar");
+				}
+
+				registroActividadesDAO.save(registroActividades);
+				return "Done!";
 			}
-			if (reg_descripcion != null) {
-				registroActividades.setReg_descripcion(reg_descripcion);
-			} else {
-				registroActividades.setReg_descripcion(registroActividades.getReg_descripcion());
-			}
-			if (fk_asig_id != null){
-				registroActividades.setFk_asig_id(fk_asig_id);
-			} else {
-				registroActividades.setFk_asig_id(registroActividades.getFk_asig_id());
-			}
-			if (actividades != null){
-				registroActividades.setActividades(actividades);
-			} else {
-				registroActividades.setActividades(registroActividades.getActividades());
-			}
-			if (reg_fecha != null){
-				registroActividades.setReg_fecha(reg_fecha);
-			} else {
-				registroActividades.setReg_fecha(registroActividades.getReg_fecha());
-			}
-			
-			registroActividadesDAO.update(registroActividades);
-			return "Done!";
-		} catch(Exception ex) {
-			ex.getMessage();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
 			return null;
 		}
 	}
-	
-	
-	
+
+	// /**
+	// * @author sigialzate
+	// * @param dateInicial
+	// * @param dateFinal
+	// * @return
+	// */
+	// @RequestMapping("/findByToDate")
+	// @ResponseBody
+	// public List<Registro_Actividades> findByToDate (Date dateInicial, Date
+	// dateFinal){
+	//
+	// List<Registro_Actividades> registroList = new
+	// ArrayList<Registro_Actividades>();
+	//
+	// registroList = registroActividadesDAO.findByToDate(dateInicial,
+	// dateFinal);
+	//
+	// return registroList;
+	//
+	// }
+
 	/*
 	 * @RequestMapping (method = RequestMethod.POST, value ="/save")
 	 * 

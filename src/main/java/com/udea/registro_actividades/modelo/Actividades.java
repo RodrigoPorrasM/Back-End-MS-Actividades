@@ -5,14 +5,11 @@
  */
 package com.udea.registro_actividades.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 
@@ -22,7 +19,7 @@ public class Actividades {
 	
 	@Id
 	@SequenceGenerator( name = "actividadesSeq", sequenceName = "tbl_actividades_seq", allocationSize = 1, initialValue = 1 )
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "actividadesSeq" )
+//    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "actividadesSeq" )
 	@Column(name="PK_act_id")
 	private Integer pk_act_id;
 	

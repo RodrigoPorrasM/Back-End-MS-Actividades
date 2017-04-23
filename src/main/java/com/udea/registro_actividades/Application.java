@@ -19,6 +19,6 @@ public class Application {
 // FindId Actividades    *OK*
 // Update Actividades    *OK*
 // Delete Actividad 
-// FindDate Rango de fechas de Actividades
+// FindDate Rango de fechas de Actividades  
 // Find Asignacion (Semestre, grupo, usuario)
 // Find AsignacionDate (Rango de fechas)
