@@ -32,19 +32,6 @@ public class Registro_ActividadesRestController {
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	/*
-	 * @RequestMapping("/find")
-	 * 
-	 * @ResponseBody public Registro_Actividades getRegistroActividades(Integer
-	 * pk_reg_id) { Registro_Actividades registroActividades = new
-	 * Registro_Actividades(); registroActividades =
-	 * registroActividadesDAO.findOne(pk_reg_id); logger.
-	 * info("registro de actividade buscado desde la funcion getRegistroActividades /find. Id: "
-	 * + pk_reg_id); return registroActividades;
-	 * 
-	 * }
-	 */
-
 	/**
 	 * @author: Gonzalo Garcia gonchalo620@gmail.com
 	 * @version: 21/04/2017/
@@ -68,19 +55,13 @@ public class Registro_ActividadesRestController {
 	@ResponseBody
 	public String setRegistroActividades(@RequestBody Registro_Actividades entityReg) {
 
-		try {
-			Registro_Actividades regEntity = getRegistro(entityReg.getPk_reg_id());
-			if (regEntity == null) {
-				registroActividadesDAO.save(entityReg);
-				return "!Done";
-			} else {
-				return "Ya existe un registro con ese id";
-			}
-
-		} catch (Exception ex) {
+		try{
+			registroActividadesDAO.save(entityReg);
+		}catch(Exception ex){
 			System.out.println(ex.getMessage());
-			return null;
+			return "ocurrió una excepción ejecutando registroActividadesDAO.save(entityReg) en /save";
 		}
+		return "!Done";
 	}
 
 	/**
@@ -123,11 +104,6 @@ public class Registro_ActividadesRestController {
 				} else {
 					System.out.println("No esta registrando asignación al momento de actualizar");
 				}
-				if (entityReg.getFk_act_id() != null) {
-					registroActividades.setFk_act_id(entityReg.getFk_act_id());
-				} else {
-					System.out.println("No esta registrando actividad al momento de actualizar");
-				}
 				if (entityReg.getReg_fecha() != null) {
 					registroActividades.setReg_fecha(entityReg.getReg_fecha());
 				} else {
@@ -139,41 +115,9 @@ public class Registro_ActividadesRestController {
 			}
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
-			return null;
+			return "error";
 		}
 	}
 
-	// /**
-	// * @author sigialzate
-	// * @param dateInicial
-	// * @param dateFinal
-	// * @return
-	// */
-	// @RequestMapping("/findByToDate")
-	// @ResponseBody
-	// public List<Registro_Actividades> findByToDate (Date dateInicial, Date
-	// dateFinal){
-	//
-	// List<Registro_Actividades> registroList = new
-	// ArrayList<Registro_Actividades>();
-	//
-	// registroList = registroActividadesDAO.findByToDate(dateInicial,
-	// dateFinal);
-	//
-	// return registroList;
-	//
-	// }
-
-	/*
-	 * @RequestMapping (method = RequestMethod.POST, value ="/save")
-	 * 
-	 * @ResponseBody public String setProduct( @RequestBody Registro_Actividades
-	 * product) { productDAO.save(product);
-	 * logger.info("producto insertado desde la funcion setProduct /save. id: "
-	 * + product.getId() + ", codigo: " +
-	 * product.getCode()+", descripcion: "+product.getDescription()); return
-	 * "producto con código: " + product.getCode()+ " guardado correctamente";
-	 * 
-	 * }
-	 */
+	
 }
