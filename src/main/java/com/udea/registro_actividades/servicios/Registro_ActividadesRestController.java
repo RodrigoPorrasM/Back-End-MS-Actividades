@@ -13,10 +13,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.udea.registro_actividades.dao.Registro_ActividadesDAO;
@@ -32,6 +30,18 @@ public class Registro_ActividadesRestController {
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+	
+	/**
+	 * @author: Gonzalo Garcia gonchalo620@gmail.com
+	 * @version: 03/05/2017/
+	 */
+	 @RequestMapping("/")
+	  @ResponseBody
+	  public String index() {
+	    return "servicios para registro actividades: /findAll, /findBy?id=, /save, /update ";
+	  }
+	 
+	
 	/**
 	 * @author: Gonzalo Garcia gonchalo620@gmail.com
 	 * @version: 21/04/2017/
@@ -44,6 +54,18 @@ public class Registro_ActividadesRestController {
 		logger.info("todos los Registro Actividades buscados desde la funcion getAllRegistroActividades /findAll");
 		return registroActividades;
 
+	}
+	
+	/**
+	 * @author sigialzate
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/findBy")
+	@ResponseBody
+	public Registro_Actividades getRegistro(Integer id) {
+		Registro_Actividades registroActividades = registroActividadesDAO.findById(id);
+		return registroActividades;
 	}
 
 	/**
@@ -64,17 +86,7 @@ public class Registro_ActividadesRestController {
 		return "!Done";
 	}
 
-	/**
-	 * @author sigialzate
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("/findBy")
-	@ResponseBody
-	public Registro_Actividades getRegistro(Integer id) {
-		Registro_Actividades registroActividades = registroActividadesDAO.findById(id);
-		return registroActividades;
-	}
+	
 
 	/**
 	 * @author sigialzate
@@ -99,11 +111,7 @@ public class Registro_ActividadesRestController {
 				} else {
 					System.out.println("No esta registrando descripcion al momento de actualizar");
 				}
-				if (entityReg.getFk_asig_id() != null) {
-					registroActividades.setFk_asig_id(entityReg.getFk_asig_id());
-				} else {
-					System.out.println("No esta registrando asignación al momento de actualizar");
-				}
+				
 				if (entityReg.getReg_fecha() != null) {
 					registroActividades.setReg_fecha(entityReg.getReg_fecha());
 				} else {

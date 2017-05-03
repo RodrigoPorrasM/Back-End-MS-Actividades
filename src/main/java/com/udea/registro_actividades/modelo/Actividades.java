@@ -30,9 +30,6 @@ public class Actividades {
 	@NotNull
 	private String act_descripcion;
 	
-	//@OneToMany(cascade= CascadeType.ALL)
-    //@JoinColumn(name="FK_act_id") 
-    //private List<Registro_Actividades> registro_Actividades = new ArrayList<Registro_Actividades>();
 	@OneToMany(mappedBy="actividades")
 	private Collection<Registro_Actividades> registro_Actividades;
 

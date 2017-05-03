@@ -1,5 +1,5 @@
 /**
- * Esta clase define Los servicios REST para el objeto Registro de actividades
+ * Esta clase define Los servicios REST para el objeto actividades
  * @author: Gonzalo Garcia gonchalo620@gmail.com
  * @version: 21/04/2017/
  */
@@ -11,9 +11,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.udea.registro_actividades.dao.ActividadesDAO;
@@ -28,11 +26,21 @@ public class ActividadesRestController {
 	@Autowired
 	ActividadesDAO actividadesDAO;
 
-	
-
-	/**
+	 /**
 	 * @author: Gonzalo Garcia gonchalo620@gmail.com
-	 * @version: 21/04/2017/
+	 * @version: 03/05/2017/
+	 */
+	 @RequestMapping("/actividades")
+	  @ResponseBody
+	  public String index() {
+	    return "servicios para actividades: /actividades/findAll, /actividades/findBy?id=";
+	  }
+	 
+	 
+	 
+	 /**
+	 * @author: Gonzalo Garcia gonchalo620@gmail.com
+	 * @version: 03/05/2017/
 	 */
 	@RequestMapping("/actividades/findAll")
 	@ResponseBody
@@ -45,7 +53,10 @@ public class ActividadesRestController {
 	}
 	
 	
-	
+	/**
+	 * @author: Gonzalo Garcia gonchalo620@gmail.com
+	 * @version: 03/05/2017/
+	 */
 	@RequestMapping("/actividades/findBy")
 	@ResponseBody
 	public Actividades getActividad(Integer id) {

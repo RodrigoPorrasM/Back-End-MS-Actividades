@@ -46,29 +46,26 @@ public class Registro_Actividades {
 	@ManyToOne
 	private Actividades actividades;
 
-	@Column(name = "FK_asig_id")
-	@NotNull
-	private Integer fk_asig_id;
+	@JoinColumn(name = "FK_asig_id")
+	@ManyToOne
+	private Asignaciones asignaciones;
 
 	// el optional = false es porque este valor no puede ser null, es decir,
 	// siempre ha de existir.
-	// @ManyToOne(optional=false)
-	// @JoinColumn(name="FK_act_id")
-	// private Actividades actividades;
-
+	
 	// CONSTRUCTOR
 	public Registro_Actividades() {
 
 	}
 
 	public Registro_Actividades(Integer pk_reg_id, Date reg_fecha, String reg_descripcion, Integer reg_horasUtilizadas,
-			Integer fk_asig_id, Actividades actividades) {
+			Asignaciones asignaciones, Actividades actividades) {
 		super();
 		this.id = pk_reg_id;
 		this.reg_fecha = reg_fecha;
 		this.reg_descripcion = reg_descripcion;
 		this.reg_horasUtilizadas = reg_horasUtilizadas;
-		this.fk_asig_id = fk_asig_id;
+		this.asignaciones = asignaciones;
 		this.actividades = actividades;
 	}
 
@@ -104,12 +101,14 @@ public class Registro_Actividades {
 		this.reg_horasUtilizadas = reg_horasUtilizadas;
 	}
 
-	public Integer getFk_asig_id() {
-		return fk_asig_id;
+	
+
+	public Asignaciones getAsignaciones() {
+		return asignaciones;
 	}
 
-	public void setFk_asig_id(Integer fk_asig_id) {
-		this.fk_asig_id = fk_asig_id;
+	public void setAsignaciones(Asignaciones asignaciones) {
+		this.asignaciones = asignaciones;
 	}
 
 	public Actividades getActividades() {

@@ -20,9 +20,6 @@ public class MainController {
     return "Microservicios de Registro Actividades ";
   }
   
-  @RequestMapping("/saludos")
-  public @ResponseBody String saludos(){
-      return "Hola";
-  }
+  
 
 }
