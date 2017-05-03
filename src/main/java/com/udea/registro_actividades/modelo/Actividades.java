@@ -4,11 +4,14 @@
  * @version: 21/04/2017/
  */
 package com.udea.registro_actividades.modelo;
+
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -27,6 +30,11 @@ public class Actividades {
 	@NotNull
 	private String act_descripcion;
 	
+	//@OneToMany(cascade= CascadeType.ALL)
+    //@JoinColumn(name="FK_act_id") 
+    //private List<Registro_Actividades> registro_Actividades = new ArrayList<Registro_Actividades>();
+	@OneToMany(mappedBy="actividades")
+	private Collection<Registro_Actividades> registro_Actividades;
 
 
 	//CONSTRUCTOR 

@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.udea.registro_actividades.modelo.Actividades;
-import com.udea.registro_actividades.modelo.Registro_Actividades;
+
 
 //con Spring Data JPA una entidad DAO que extienda de CrudRepository 
 // obtiene por defecto los siguientes metodos save, delete, deleteAll, findOne y findAll.
@@ -24,5 +24,5 @@ public interface ActividadesDAO extends CrudRepository<Actividades, Integer> {
 	// http://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
 
-	public Registro_Actividades findById(Integer id);
+	public Actividades findById(Integer id);
 }

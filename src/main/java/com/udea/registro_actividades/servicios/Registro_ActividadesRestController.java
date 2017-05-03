@@ -59,7 +59,7 @@ public class Registro_ActividadesRestController {
 			registroActividadesDAO.save(entityReg);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
-			return "ocurrió una excepción ejecutando registroActividadesDAO.save(entityReg) en /save";
+			return "ocurrió una excepción ejecutando registroActividadesDAO.save(entityReg) en /save, el registro enviado no se pudo grabar en la base de datos";
 		}
 		return "!Done";
 	}

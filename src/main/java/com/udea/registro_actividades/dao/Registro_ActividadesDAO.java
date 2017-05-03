@@ -23,6 +23,6 @@ public interface Registro_ActividadesDAO extends CrudRepository<Registro_Activid
 	// http://docs.spring.io/spring-data/data-jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
 	public Registro_Actividades findById(Integer id);
-//	}
+
 
 }
