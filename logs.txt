@@ -1,3 +1,8 @@
 2017-03-28 22:29:09 FATAL ProductRestController:41 - fatal
 2017-03-28 22:29:09 WARN  ProductRestController:42 - warn
 2017-03-28 22:29:09 ERROR ProductRestController:44 - error
+2017-05-04 00:57:56 ERROR Registro_ActividadesRestController:93 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: null
+2017-05-04 01:04:32 ERROR Registro_ActividadesRestController:95 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: null
+2017-05-04 01:04:34 ERROR Registro_ActividadesRestController:95 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: null
+2017-05-04 01:07:06 ERROR Registro_ActividadesRestController:96 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: null
+2017-05-04 01:12:56 ERROR Registro_ActividadesRestController:94 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: null

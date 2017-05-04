@@ -15,4 +15,11 @@ public class Application {
 	}
 }
 
+//se debería utilizar put y no post para actualizaciones
+//arreglar formato de fecha en registro de actividades
+//arreglar erorr en getRegistroAsignacion() de la clase Registro_ActividadesRestController
+//arreglar que cuando se busque por actividades se traiga tambien los registros
+//manytomany
+//mapear la entidad usuarios y roles
+
 
