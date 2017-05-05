@@ -97,8 +97,7 @@ public class Registro_ActividadesRestController {
 		try {
 			//
 			Asignaciones asignaciones = new Asignaciones();
-			asignaciones = asignacionesDAO.findById(idAsig);
-			System.out.println("la asignacion es: " + asignaciones);
+			asignaciones = asignacionesDAO.findById(idAsig);			
 			if (asignaciones == null) {
 				throw new Exception("no se pudo consultar una asignacion con ese id o no existe");
 			}
@@ -218,7 +217,6 @@ public class Registro_ActividadesRestController {
 		public ResponseEntity<?> getRegistroGrupoAct(Integer idGrupo) {
 			
 			Grupos grupo = gruposDAO.findById(idGrupo);
-			System.out.println(grupo);
 			if (grupo == null) {
 				return new ResponseEntity(new Exception("No hay ningun grupo con ese id"), HttpStatus.NOT_FOUND);
 			}
@@ -238,5 +236,35 @@ public class Registro_ActividadesRestController {
 			logger.info("Registros de Actividad buscados desde la funcion getRegistroGrupoAct /findByGrupoAct");
 			return new ResponseEntity<List<Registro_Actividades>>(registroActividades, HttpStatus.OK);
 		}
+		
+		//SERVICIO PARA TRAER TODOS LOS REGISTROS DE ACTIVIDADES DADO UN GRUPO Y UN SEMESTRE
+		/**
+		 * @author: Gonzalo Garcia gonchalo620@gmail.com
+		 * @version: 05/05/2017/
+		 */
+			@RequestMapping(method = RequestMethod.GET, value = "/findByGrupoSemestre")
+			@ResponseBody
+			public ResponseEntity<?> getRegistroByGrupoSemestre(Integer idGrupo, Integer idSemestre) {
+				
+				Grupos grupo = gruposDAO.findById(idGrupo);
+				if (grupo == null) {
+					return new ResponseEntity(new Exception("No hay ningun grupo con ese id"), HttpStatus.NOT_FOUND);
+				}
+				Semestres semestre = semestresDAO.findById(idSemestre);
+				if (semestre == null) {
+					return new ResponseEntity(new Exception("No hay ningun semestre con ese id"), HttpStatus.NOT_FOUND);
+				}
+				Asignaciones asignaciones = asignacionesDAO.findByGruposAndSemestre(grupo, semestre);
+				if (asignaciones == null) {
+					return new ResponseEntity(new Exception("No hay ninguna asignación de este grupo en el semestre activo"), HttpStatus.NOT_FOUND);
+				}
+				List<Registro_Actividades> registroActividades = new ArrayList<Registro_Actividades>();
+				registroActividades = (List<Registro_Actividades>) registroActividadesDAO.findByAsignaciones(asignaciones);
+				if(registroActividades.isEmpty()){
+					return new ResponseEntity(HttpStatus.NO_CONTENT);
+				}
+				logger.info("Registros de Actividad buscados desde la funcion getRegistroGrupoAct /findByGrupoAct");
+				return new ResponseEntity<List<Registro_Actividades>>(registroActividades, HttpStatus.OK);
+			}
 
 }
