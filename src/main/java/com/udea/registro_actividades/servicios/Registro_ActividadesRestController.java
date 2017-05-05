@@ -20,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.udea.registro_actividades.dao.AsignacionesDAO;
+import com.udea.registro_actividades.dao.GruposDAO;
 import com.udea.registro_actividades.dao.Registro_ActividadesDAO;
+import com.udea.registro_actividades.dao.SemestresDAO;
 import com.udea.registro_actividades.modelo.Asignaciones;
+import com.udea.registro_actividades.modelo.Grupos;
 import com.udea.registro_actividades.modelo.Registro_Actividades;
+import com.udea.registro_actividades.modelo.Semestres;
 
 @Controller
 public class Registro_ActividadesRestController {
@@ -30,8 +34,14 @@ public class Registro_ActividadesRestController {
 	final static Logger logger = Logger.getLogger(Registro_ActividadesRestController.class);
 
 	@Autowired
-	Registro_ActividadesDAO registroActividadesDAO;
+	SemestresDAO semestresDAO;
+	@Autowired
 	AsignacionesDAO asignacionesDAO;
+	@Autowired
+	GruposDAO gruposDAO;
+	@Autowired
+	Registro_ActividadesDAO registroActividadesDAO;
+	
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -79,7 +89,7 @@ public class Registro_ActividadesRestController {
 		return new ResponseEntity<Registro_Actividades>(registroActividades, HttpStatus.OK); 
 	}
 
-	// en proceso, aún no funciona correctamente
+	//SERVICIO PARA RETORNAR TODAS LAS ACTIVIDADES DADA UNA ASIGNACION
 	@RequestMapping("/findByAsig")
 	@ResponseBody
 	public List<Registro_Actividades> getRegistroAsignacion(Integer idAsig) {
@@ -161,7 +171,7 @@ public class Registro_ActividadesRestController {
 	 * @param entityReg
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/update")
+	/*@RequestMapping(method = RequestMethod.POST, value = "/update")
 	@ResponseBody
 	public String update(@RequestBody Registro_Actividades entityReg) {
 		try {
@@ -193,6 +203,40 @@ public class Registro_ActividadesRestController {
 			System.out.println(ex.getMessage());
 			return "error";
 		}
-	}
+	}*/
+	
+	
+	
+	
+	//SERVICIO PARA TRAER TODOS LOS REGISTROS DE ACTIVIDADES DEL SEMESTRE ACTUAL DADO UN GRUPO
+	/**
+	 * @author: Gonzalo Garcia gonchalo620@gmail.com
+	 * @version: 05/05/2017/
+	 */
+		@RequestMapping(method = RequestMethod.GET, value = "/findByGrupoAct")
+		@ResponseBody
+		public ResponseEntity<?> getRegistroGrupoAct(Integer idGrupo) {
+			
+			Grupos grupo = gruposDAO.findById(idGrupo);
+			System.out.println(grupo);
+			if (grupo == null) {
+				return new ResponseEntity(new Exception("No hay ningun grupo con ese id"), HttpStatus.NOT_FOUND);
+			}
+			Semestres semestreActual = semestresDAO.findByEstadoActivo();
+			if (semestreActual == null) {
+				return new ResponseEntity(new Exception("No hay ningun semestre activo"), HttpStatus.NOT_FOUND);
+			}
+			Asignaciones asignaciones = asignacionesDAO.findByGruposAndSemestre(grupo, semestreActual);
+			if (asignaciones == null) {
+				return new ResponseEntity(new Exception("No hay ninguna asignación de este grupo en el semestre activo"), HttpStatus.NOT_FOUND);
+			}
+			List<Registro_Actividades> registroActividades = new ArrayList<Registro_Actividades>();
+			registroActividades = (List<Registro_Actividades>) registroActividadesDAO.findByAsignaciones(asignaciones);
+			if(registroActividades.isEmpty()){
+				return new ResponseEntity(HttpStatus.NO_CONTENT);
+			}
+			logger.info("Registros de Actividad buscados desde la funcion getRegistroGrupoAct /findByGrupoAct");
+			return new ResponseEntity<List<Registro_Actividades>>(registroActividades, HttpStatus.OK);
+		}
 
 }

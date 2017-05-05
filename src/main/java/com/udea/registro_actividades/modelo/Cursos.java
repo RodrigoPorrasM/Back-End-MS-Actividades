@@ -4,9 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
@@ -32,6 +37,9 @@ public class Cursos {
 	@NotNull
 	@Column(name = "cur_totalHorasSemestre")
 	private Integer curTotalHorasSemestre;
+	
+	@ManyToMany(mappedBy="cursos", cascade=CascadeType.ALL)
+	private Collection<Grupos> grupos;
 
 	public Cursos(Integer curId, String curNombre, Integer curCantidadCreditos, Integer curTotalHorasSemestre) {
 		super();

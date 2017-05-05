@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.udea.registro_actividades.modelo.Asignaciones;
+import com.udea.registro_actividades.modelo.Grupos;
+import com.udea.registro_actividades.modelo.Semestres;
 
 
 //con Spring Data JPA una entidad DAO que extienda de CrudRepository 
@@ -25,4 +27,7 @@ public interface AsignacionesDAO extends CrudRepository<Asignaciones, Integer> {
 
 
 	public Asignaciones findById(Integer id);
+	
+	
+	public Asignaciones findByGruposAndSemestre(Grupos grupo, Semestres semestre);
 }

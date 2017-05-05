@@ -2,12 +2,16 @@ package com.udea.registro_actividades.modelo;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 //import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -40,7 +44,12 @@ public class Grupos {
 	private String observaciones;
 	
 	@OneToMany(mappedBy = "grupos")
-	private Collection<Asignaciones> asignacionesCollection;
+	private Collection<Asignaciones> asignaciones;
+	
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name = "TBL_Cursos_Grupos", joinColumns = @JoinColumn(name = "PK_gru_id"), inverseJoinColumns = @JoinColumn(name = "PK_cur_id"))
+	private Collection<Cursos> cursos;
 	
 	public Grupos(Integer id, String nombre, Integer cantidadCupos, String horario, String observaciones) {
 		super();
@@ -94,6 +103,16 @@ public class Grupos {
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+	
+	
+
+	public Collection<Cursos> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(Collection<Cursos> cursos) {
+		this.cursos = cursos;
 	}
 
 	@Override

@@ -91,6 +91,8 @@ public class Asignaciones {
 	public void setUsuId(Integer usuId) {
 		this.usuId = usuId;
 	}
+	
+	
 
 	@Override
 	public String toString() {

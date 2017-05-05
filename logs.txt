@@ -7,3 +7,4 @@
 2017-05-04 01:07:06 ERROR Registro_ActividadesRestController:96 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: null
 2017-05-04 01:12:56 ERROR Registro_ActividadesRestController:94 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: null
 2017-05-04 10:50:51 ERROR Registro_ActividadesRestController:149 - ocurrió una excepción ejecutando registroActividadesDAO.save(entityReg) en /save, el registro enviado no se pudo grabar en la base de datos could not execute statement; SQL [n/a]; constraint [FK_act_id]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2017-05-05 15:01:28 ERROR Registro_ActividadesRestController:102 - ocurrió una excepción, no se pudo recuperar los registros de actividades buscado por el idAsig, el ERROR ES: no se pudo consultar una asignacion con ese id o no existe

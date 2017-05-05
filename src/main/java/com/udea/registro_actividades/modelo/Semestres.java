@@ -21,7 +21,7 @@ public class Semestres {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="semestreSeq")
 	@SequenceGenerator(name="semestreSeq", sequenceName="tbl_semestres_seq", allocationSize=1)
 	@Column(name = "PK_sem_id")
-	private Integer semId;
+	private Integer id;
 	
 	@NotNull
 	@Column(name="sem_nombre")
@@ -37,7 +37,7 @@ public class Semestres {
 	
 	public Semestres(Integer semId, String semNombre, char semEstado, Collection<Asignaciones> asignacionesCollection) {
 		super();
-		this.semId = semId;
+		this.id = semId;
 		this.semNombre = semNombre;
 		this.semEstado = semEstado;
 		
@@ -49,11 +49,11 @@ public class Semestres {
 	}
 
 	public Integer getSemId() {
-		return semId;
+		return id;
 	}
 
 	public void setSemId(Integer semId) {
-		this.semId = semId;
+		this.id = semId;
 	}
 
 	public String getSemNombre() {
@@ -75,7 +75,7 @@ public class Semestres {
 
 	@Override
 	public String toString() {
-		return "Semestre [semId=" + semId + ", semNombre=" + semNombre + ", semEstado=" + semEstado
+		return "Semestre [semId=" + id + ", semNombre=" + semNombre + ", semEstado=" + semEstado
 				+ "]";
 	}
 	

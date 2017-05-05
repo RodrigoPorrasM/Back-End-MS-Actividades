@@ -10,12 +10,16 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.udea.registro_actividades.dao.ActividadesDAO;
+import com.udea.registro_actividades.dao.GruposDAO;
 import com.udea.registro_actividades.modelo.Actividades;
+import com.udea.registro_actividades.modelo.Grupos;
 
 
 @Controller
@@ -25,6 +29,7 @@ public class ActividadesRestController {
 
 	@Autowired
 	ActividadesDAO actividadesDAO;
+	GruposDAO gruposDAO;
 
 	 /**
 	 * @author: Gonzalo Garcia gonchalo620@gmail.com
@@ -47,7 +52,7 @@ public class ActividadesRestController {
 	public List<Actividades> getAllActividades() {
 		List<Actividades> actividades = new ArrayList<Actividades>();
 		actividades = (List<Actividades>) actividadesDAO.findAll();
-		logger.info("todos las Actividades buscadas desde la funcion getAllActividades /Actividades/findAll");
+		logger.info("todos las Actividades buscadas desde la funcion getAllActividades /actividades/findAll");
 		return actividades;
 
 	}
@@ -63,6 +68,8 @@ public class ActividadesRestController {
 		Actividades actividades = actividadesDAO.findById(id);
 		return actividades;
 	}
+	
+	
 	
 	
 }
