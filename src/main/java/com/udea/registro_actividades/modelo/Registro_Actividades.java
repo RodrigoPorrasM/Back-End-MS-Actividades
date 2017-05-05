@@ -20,6 +20,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "TBL_Registro_Actividades", catalog = "", schema = "public")
 public class Registro_Actividades {
@@ -32,6 +34,7 @@ public class Registro_Actividades {
 
 	@Column(name = "reg_fecha")
 	@NotNull
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date reg_fecha;
 
 	@Column(name = "reg_descripcion")

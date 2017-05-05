@@ -43,7 +43,7 @@ public class Registro_ActividadesRestController {
 	Registro_ActividadesDAO registroActividadesDAO;
 	
 
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * @author: Gonzalo Garcia gonchalo620@gmail.com
