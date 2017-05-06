@@ -164,6 +164,36 @@ public class Registro_ActividadesRestController {
 		logger.info("registro de actividad guardado");
 		return new ResponseEntity(entityReg, HttpStatus.CREATED);
 	}
+	
+	
+	//FALTA PROBAR SU CORRECTO FUNCIONAMIENTO
+	/**
+	 * @author: Gonzalo Garcia gonchalo620@gmail.com
+	 * @version: 05/05/2017/
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateUser( @RequestBody Registro_Actividades registroActividades) {
+		
+
+		Registro_Actividades registro = registroActividadesDAO.findById(registroActividades.getPk_reg_id());
+
+		if (registro == null) {
+			return new ResponseEntity(new Exception("No hay ningún registro de Actividad con id: "+registroActividades.getPk_reg_id()), HttpStatus.NOT_FOUND);
+		}
+
+		registro.setReg_descripcion(registroActividades.getReg_descripcion());
+		registro.setReg_fecha(registroActividades.getReg_fecha());
+		registro.setReg_horasUtilizadas(registroActividades.getReg_horasUtilizadas());
+		registro.setActividades(registroActividades.getActividades());
+		registro.setAsignaciones(registroActividades.getAsignaciones());
+
+		registroActividadesDAO.save(registro);
+		//logger.info("se actualizó el registro de Actividad con id: ", registroActividades.getPk_reg_id());
+		return new ResponseEntity<Registro_Actividades>(registro, HttpStatus.OK);
+	}
+	
+	
+	
 
 	/**
 	 * @author sigialzate
