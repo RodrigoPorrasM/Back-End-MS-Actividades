@@ -11,13 +11,15 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.udea.registro_actividades.dao.AsignacionesDAO;
 import com.udea.registro_actividades.modelo.Asignaciones;
 
-
+//crossorigin para que permita ser usado desde afuera, se pueden hacer más configuraciones. con crossorigin sin parámetros queda abierto para cualquier maquina
+@CrossOrigin
 @Controller
 public class AsignacionesRestController {
 
