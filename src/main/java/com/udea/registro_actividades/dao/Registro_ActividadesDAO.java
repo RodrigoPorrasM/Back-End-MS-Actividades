@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import com.udea.registro_actividades.modelo.Asignaciones;
 import com.udea.registro_actividades.modelo.Registro_Actividades;
@@ -35,7 +36,10 @@ public interface Registro_ActividadesDAO extends CrudRepository<Registro_Activid
 	 * @param asignacion
 	 * @return List<Registro_Actividades>
 	 */	
+	@Query("from Registro_Actividades where asignaciones=?1 ORDER BY regfecha DESC")
 	public List<Registro_Actividades> findByAsignaciones(Asignaciones asignacion);
+	
+	//public List<Registro_Actividades> findByAsignacionesOrderByRegfechaDesc(Asignaciones asignacion);
 	
 	
 

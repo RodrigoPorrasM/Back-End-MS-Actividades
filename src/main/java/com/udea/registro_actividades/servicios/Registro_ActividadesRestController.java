@@ -96,7 +96,7 @@ public class Registro_ActividadesRestController {
 	//SERVICIO PARA RETORNAR TODAS LAS ACTIVIDADES DADA UNA ASIGNACION
 	@RequestMapping("/findByAsig")
 	@ResponseBody
-	public List<Registro_Actividades> getRegistroAsignacion(Integer idAsig) {
+	public List<Registro_Actividades> findByAsignacionesByOrderByRegfecha(Integer idAsig) {
 		List<Registro_Actividades> registroActividades = new ArrayList<Registro_Actividades>();
 		try {
 			//

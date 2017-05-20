@@ -5,6 +5,7 @@
  */
 package com.udea.registro_actividades.modelo;
 
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -34,8 +35,8 @@ public class Registro_Actividades {
 
 	@Column(name = "reg_fecha")
 	@NotNull
-	@JsonFormat(pattern="dd/MM/yyyy")
-	private Date reg_fecha;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone="GMT-5")
+	private Date regfecha;
 
 	@Column(name = "reg_descripcion")
 	@NotNull
@@ -65,7 +66,7 @@ public class Registro_Actividades {
 			Asignaciones asignaciones, Actividades actividades) {
 		super();
 		this.id = pk_reg_id;
-		this.reg_fecha = reg_fecha;
+		this.regfecha = reg_fecha;
 		this.reg_descripcion = reg_descripcion;
 		this.reg_horasUtilizadas = reg_horasUtilizadas;
 		this.asignaciones = asignaciones;
@@ -81,11 +82,11 @@ public class Registro_Actividades {
 	}
 
 	public Date getReg_fecha() {
-		return reg_fecha;
+		return regfecha;
 	}
 
 	public void setReg_fecha(Date reg_fecha) {
-		this.reg_fecha = reg_fecha;
+		this.regfecha = reg_fecha;
 	}
 
 	public String getReg_descripcion() {
