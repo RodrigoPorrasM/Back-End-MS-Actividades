@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Esta clase define la entidad para el objeto Registro de actividades
  * @author: Gonzalo Garcia gonchalo620@gmail.com
  * @version: 21/04/2017/
@@ -35,7 +35,7 @@ public class Registro_Actividades {
 
 	@Column(name = "reg_fecha")
 	@NotNull
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone="GMT-5")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 	private Date regfecha;
 
 	@Column(name = "reg_descripcion")
