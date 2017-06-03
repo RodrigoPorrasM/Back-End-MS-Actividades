@@ -15,4 +15,4 @@ repositorio para el microservicio de actividades
 - Run the service:
   1. Run a new maven command (Right click over project, Run as.. / Maven build...)
   2. Write in the goals: "spring-boot:run" (without quotes) and then click the RUN button
-#Note: Default port is 9999
+# Note: Default port is 9999
